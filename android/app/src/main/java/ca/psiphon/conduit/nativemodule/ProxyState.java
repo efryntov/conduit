@@ -82,13 +82,6 @@ public abstract class ProxyState implements Parcelable {
         return bundle.getParcelable("proxy_state");
     }
 
-    public String toJson() throws JSONException {
-        JSONObject json = new JSONObject();
-        json.put("status", status().name());
-        json.put("networkState", networkState().name());
-        return json.toString();
-    }
-
     public abstract Builder toBuilder();
 
     @AutoValue.Builder
