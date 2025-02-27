@@ -123,6 +123,20 @@ public class ConduitStateService extends Service {
         }
 
         @Override
+        public String fetchConduitPrivateKey() {
+            // Check if the client is trusted
+            int uid = Binder.getCallingUid();
+            if (!isTrustedUid(uid)) {
+                throw new SecurityException("Client is not authorized to register with this service.");
+            }
+            String privateKey = getConduitPrivateKey();
+            if (privateKey.isEmpty()) {
+                throw new IllegalStateException("Conduit private key is not set.");
+            }
+            return privateKey;
+        }
+
+        @Override
         public void unregisterClient(IConduitStateCallback client) {
             if (client == null) {
                 return;

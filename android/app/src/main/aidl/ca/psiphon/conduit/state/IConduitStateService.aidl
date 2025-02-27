@@ -7,5 +7,9 @@ import ca.psiphon.conduit.state.IConduitStateCallback;
 interface IConduitStateService {
     void registerClient(IConduitStateCallback callback);
     void unregisterClient(IConduitStateCallback callback);
+    // Register the client with the JSON schema version to be used for the state updates
+    // via the IConduitStateCallback.onStateUpdate method
     void registerClientWithSchemaVersion(IConduitStateCallback callback, int schemaVersion);
+    // A simple method to fetch the Conduit private key
+    String fetchConduitPrivateKey();
 }
